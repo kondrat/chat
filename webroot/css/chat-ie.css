@@ -1,0 +1,21 @@
+fieldset {
+	position: relative;
+  margin-top:2em;
+  padding-top:2.5em;
+}
+legend {
+	position: absolute;
+	top: -1.0em;
+	left: .2em;
+}
+.fildsetReg {
+	margin: 2.2em 1em 0 1em;
+}
+.submit input {
+	/*margin-left:-14em;*/
+	display: inline; 
+	margin:0;
+}
+div.formWrap #UserAutoLogin {
+	position:absolute;
+}
