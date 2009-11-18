@@ -1,7 +1,7 @@
 <?php
 class AppController extends Controller {
 	var $components = array( 'Auth','AutoLogin', 'RequestHandler', 'Email','DebugKit.Toolbar');
-	var $helpers = array('Javascript','Html', 'Form', 'Cache','Gravatar');
+	var $helpers = array('Javascript','Html', 'Form', 'Cache','gravatar');
 	var $publicControllers = array('pages', 'test');
 //--------------------------------------------------------------------
 	function beforeFilter() {
