@@ -20,7 +20,7 @@
 		echo '<![endif]-->';
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
-		echo $javascript->link(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','chat'));
+		echo $javascript->link(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','chat','common'));
 
 		echo $scripts_for_layout;
 	?>
