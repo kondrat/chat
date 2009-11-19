@@ -20,7 +20,7 @@
 		echo '<![endif]-->';
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
-		echo $javascript->link(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','chat','common'));
+		echo $javascript->link(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','chat_test','common'));//'chat',
 
 		echo $scripts_for_layout;
 	?>
@@ -28,7 +28,7 @@
 <body>
 	<div class="pageheader" style="">
 			<div class="container">
-				<div class="span-24">
+				<div class="span-20">
 					
 					
 			        <div class="headerData">
@@ -59,7 +59,7 @@
 				    			}
 								?>
 								</li>
-								<li><?php echo $html->link(__('Home',true),array('controller'=>'intervals','action'=>'index')).'&nbsp';?></li>
+								<li><?php echo $html->link(__('Home',true),array('controller'=>'messages','action'=>'index')).'&nbsp';?></li>
 			    			<li><?php echo $html->link("Eng",array('lang'=>'en')).'&nbsp';?></li>
 			    			<li><?php echo $html->link("Рус",array('lang'=>'ru')).'&nbsp';?> </li>
 			    		</ul>
@@ -93,16 +93,7 @@
 		        Right sidebar
 		        <hr />
 						
-						<div id="test1">test1</div>
-						<p class="margin:0;"> Data from app</p>
-						<div id="test2"></div>
-						<p style="margin:0"> real </p>
-						
-						<div id="test3">test3</div>
-						
-
-
-
+						<div id="chatStatus">Chat Status</div>
 		    </div>
 
 

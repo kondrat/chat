@@ -1,5 +1,6 @@
 <div class="span-16" style="margin-bottom: 1em;">
 	<h2><?php __('Messages');?></h2>
+	<div class="span-16" style="margin-bottom:1em;"><button id="startChat">Start chat</button></div>
 	<div class="span-16 messageField" style="height:100px; background-color: #eee;border:1px solid #ccc;">
 	
 	</div>

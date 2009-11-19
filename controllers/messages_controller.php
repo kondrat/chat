@@ -5,7 +5,7 @@ class MessagesController extends AppController {
 	var $helpers = array();
 //--------------------------------------------------------------------	
 	function beforeFilter() {
-		$this->Auth->allow('index','add');
+		$this->Auth->allow('index','add','send');
 		parent::beforeFilter(); 
 		$this->Auth->autoRedirect = false;
 
@@ -15,6 +15,33 @@ class MessagesController extends AppController {
 		}	
 	}
 //--------------------------------------------------------------------
+
+	function send() {
+		Configure::write('debug', 0);
+		$this->autoRender = false;
+		echo json_encode(array('result' =>'ok' ) );
+		exit;
+	}
+
+//--------------------------------------------------------------------
+
+	function event() {
+		Configure::write('debug', 0);
+		$this->autoRender = false;
+		echo json_encode(array('result' =>'ok' ) );
+		exit;
+	}
+
+//--------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 	function index() {
 		$this->Message->recursive = 0;
 		$this->set('messages', $this->paginate());
