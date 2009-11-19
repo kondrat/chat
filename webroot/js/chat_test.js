@@ -69,25 +69,13 @@ function chat_wait_opponent() {
 }
 
 
-
-
-
-
-function status_set(text) {
-	$("#chatStatus").html(text);
-}
-
-function status_get() {
-	return $("#chatStatus").text();
-}
-
 /**
  * Пользователь получил Uid.
  * Запишем его
  */
 function chat_set_uid(sid) {
 	//chatUid = sid;
-	chatUid = 'abc';
+	chatUid = 'abc14';
 	chat_get_events();
 }
 
@@ -111,27 +99,29 @@ $(document).blur(function(){
  * Long-polling соединение
  */
 function chat_get_events(){
-
+	console.log('log');
 	$.ajax({
 		type: "POST",
-		url: "./messages/event/"+chatUid,
+		url: "http://chat:8088/messages/event/identifier="+chatUid,
+		//url: "http://localhost:8088?identifier="+chatUid,
 		async: true,
 		cache: false,
 		timeout:40000,
 		dataType: "json",
 		data: {"action": 'get'},
 		success: function(data){
-			console.log(data);
+			//console.log(data);
+			alert('blin');
 			setTimeout('chat_get_events()', 500)
 			$("#online_counter").text(data.online)
 			var chat_time = new Date()
 			switch (data.action) {
 				case 'new_message':
 					$("#messages>ol").append('<li class="message'+(data.user=='im'?'To':'From')+'"><em class="name"><i>'+(data.user=='im'?'Я':'Некто')+'</i></em> <span class="message">'+data.message+'</span></li>')
-					// скролл
-					$(".logbox").animate({ scrollTop: $(".logbox").attr("scrollHeight") }, 'normal')
-					if (chat_sound_on) soundManager.play(data.user=='im' ? 'obtaining' : 'sending')
-					if (!chat_title_timer) chat_blink_title()
+					// scroll
+					//$(".logbox").animate({ scrollTop: $(".logbox").attr("scrollHeight") }, 'normal')
+					//if (chat_sound_on) soundManager.play(data.user=='im' ? 'obtaining' : 'sending')
+					//if (!chat_title_timer) chat_blink_title()
 					chat_ping_receive = chat_time.getTime()
 					break;
 				case 'get_ready':
@@ -181,6 +171,7 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
+			console.log('error');
 			setTimeout('chat_get_events()', 2000)
 		}
 	})
@@ -304,6 +295,17 @@ function test_ping_receive() {
 		// временно не будем прерывать чат по таймауту
 		//chat_stop(true);
 	}
+}
+
+/**
+ * status output
+ *
+ */
+function status_set(text) {
+	$("#chatStatus").html(text);
+}
+function status_get() {
+	return $("#chatStatus").text();
 }
 
 $(document).ready(function(){

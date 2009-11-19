@@ -5,7 +5,7 @@ class MessagesController extends AppController {
 	var $helpers = array();
 //--------------------------------------------------------------------	
 	function beforeFilter() {
-		$this->Auth->allow('index','add','send');
+		$this->Auth->allow('index','add','send','event');
 		parent::beforeFilter(); 
 		$this->Auth->autoRedirect = false;
 
@@ -30,6 +30,7 @@ class MessagesController extends AppController {
 		$this->autoRender = false;
 		echo json_encode(array('result' =>'ok' ) );
 		exit;
+
 	}
 
 //--------------------------------------------------------------------
