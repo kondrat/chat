@@ -96,10 +96,10 @@ $(document).blur(function(){
 
 
 /**
- * Long-polling соединение
+ * Long-polling connection
  */
 function chat_get_events(){
-	console.log('log');
+	//console.log('log lon-poll');
 	$.ajax({
 		type: "POST",
 		url: "http://chat:8088/messages/event/identifier="+chatUid,
@@ -110,8 +110,8 @@ function chat_get_events(){
 		dataType: "json",
 		data: {"action": 'get'},
 		success: function(data){
-			//console.log(data);
-			alert('blin');
+			console.log(data);
+			//alert('blin');
 			setTimeout('chat_get_events()', 500)
 			$("#online_counter").text(data.online)
 			var chat_time = new Date()
@@ -171,7 +171,7 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
-			console.log('error');
+			console.log(textStatus);
 			setTimeout('chat_get_events()', 2000)
 		}
 	})

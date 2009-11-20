@@ -28,7 +28,9 @@ class MessagesController extends AppController {
 	function event() {
 		Configure::write('debug', 0);
 		$this->autoRender = false;
-		echo json_encode(array('result' =>'ok' ) );
+
+		echo json_encode(array('result' =>'event ok' ) );
+	
 		exit;
 
 	}
