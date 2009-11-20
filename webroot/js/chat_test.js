@@ -24,7 +24,7 @@ $(document).ready(function(){
 	});
 });
 /**
- * Нажатие кнопки "Начать чат"
+ * Press button "Start chat"
  */
 function chat_start() {
 
@@ -75,7 +75,7 @@ function chat_wait_opponent() {
  */
 function chat_set_uid(sid) {
 	//chatUid = sid;
-	chatUid = 'abc14';
+	chatUid = 'w';
 	chat_get_events();
 }
 
@@ -102,16 +102,15 @@ function chat_get_events(){
 	//console.log('log lon-poll');
 	$.ajax({
 		type: "POST",
-		url: "http://chat:8088/messages/event/identifier="+chatUid,
-		//url: "http://localhost:8088?identifier="+chatUid,
+		url: "http://chat/messages/event",//identifier="+chatUid,
 		async: true,
 		cache: false,
 		timeout:40000,
-		dataType: "json",
+		dataType: "text",
 		data: {"action": 'get'},
 		success: function(data){
 			console.log(data);
-			//alert('blin');
+			alert('blin');
 			setTimeout('chat_get_events()', 500)
 			$("#online_counter").text(data.online)
 			var chat_time = new Date()
@@ -171,7 +170,7 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
-			console.log(textStatus);
+			console.log('blinnn');
 			setTimeout('chat_get_events()', 2000)
 		}
 	})
