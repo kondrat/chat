@@ -102,7 +102,7 @@ function chat_get_events(){
 	//console.log('log lon-poll');
 	$.ajax({
 		type: "POST",
-		url: "http://chat/messages/event",//identifier="+chatUid,
+		url: "http://chat/messages/event",
 		async: true,
 		cache: false,
 		timeout:40000,
@@ -110,7 +110,6 @@ function chat_get_events(){
 		data: {"action": 'get'},
 		success: function(data){
 			console.log(data);
-			alert('blin');
 			setTimeout('chat_get_events()', 500)
 			$("#online_counter").text(data.online)
 			var chat_time = new Date()

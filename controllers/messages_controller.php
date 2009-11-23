@@ -38,10 +38,8 @@ class MessagesController extends AppController {
 													"HTTP/1.1 200 OK\n" .
 													//"Content-Type	text/plain\n" .																									
 													"identifier=w\n" 
-											);
-								
-	
-	
+								);
+
 								//stream_socket_shutdown($f, STREAM_SHUT_WR);
 								$ids = stream_get_contents($f);
 								echo $ids;
