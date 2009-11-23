@@ -17,10 +17,25 @@ class MessagesController extends AppController {
 //--------------------------------------------------------------------
 
 	function send() {
-		Configure::write('debug', 0);
-		$this->autoRender = false;
-		echo json_encode(array('result' =>'ok' ) );
-		exit;
+		if ($this->RequestHandler->isAjax()) {
+		
+			Configure::write('debug', 0);
+			$this->autoRender = false;
+			
+			$data = $this->data['action'];
+			
+			
+			
+			
+			
+			echo json_encode(array('result' =>'ok','data'=>$data ) );
+			
+			
+			
+			
+			exit;
+			
+		}
 	}
 
 //--------------------------------------------------------------------

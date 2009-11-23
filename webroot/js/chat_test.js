@@ -37,7 +37,7 @@ function chat_start() {
 	status_set('<span style="color:darkBlue;">Подключаемся к серверу</style>');
 	$.post(
 		"./messages/send",
-		{"action": 'get_uid'},
+		{"data['action']": 'get_uid'},
 		function(data){
 			console.log(data);
 			if (data.result == 'ok') {
@@ -50,6 +50,18 @@ function chat_start() {
 	var chat_time = new Date();
 	chat_ping_send = chat_time.getTime();
 }
+
+/**
+ * Uid assigned to user.
+ */
+function chat_set_uid(sid) {
+	//chatUid = sid;
+	chatUid = 'w';
+	chat_get_events();
+}
+
+
+
 /**
  * Сообщить об ожидании оппонента
  */
@@ -66,17 +78,6 @@ function chat_wait_opponent() {
 		});
 	var chat_time = new Date();
 	chat_ping_send = chat_time.getTime();
-}
-
-
-/**
- * Пользователь получил Uid.
- * Запишем его
- */
-function chat_set_uid(sid) {
-	//chatUid = sid;
-	chatUid = 'w';
-	chat_get_events();
 }
 
 function chat_blink_title() {
