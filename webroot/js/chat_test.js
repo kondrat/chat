@@ -81,7 +81,28 @@ function chat_wait_opponent() {
 	chat_ping_send = chat_time.getTime();
 }
 //------------------------------------
+/**
+ * Send message
+ */
+$("#message_form").submit(function(){
+	if ( chat_send_message( $("#text").val() ) ) {
+		$("#text").val('');
+		$("#text").focus();
+	}
+	return false;
+});
 
+function chat_send_message(message) {
+	if (!chat_cid) {
+		return false;
+	}
+	$.post("/send", {"action": 'send_message', "uid": chatUid, "cid": chat_cid, "message": message});
+	var chat_time = new Date();
+	chat_ping_send = chat_time.getTime();
+	return true;
+}
+
+//-----------------------------------
 function chat_blink_title() {
 	if (chat_focus) return;
 	document.title = document.title == '***** '+chat_original_title ? '_____ '+chat_original_title : '***** '+chat_original_title;
@@ -202,18 +223,6 @@ function chat_send_ready(uid, cid) {
 
 
 
-/**
- * Отправить сообщение
- */
-function chat_send_message(message) {
-	if (!chat_cid) {
-		return false;
-	}
-	$.post("/send", {"action": 'send_message', "uid": chatUid, "cid": chat_cid, "message": message});
-	var chat_time = new Date();
-	chat_ping_send = chat_time.getTime();
-	return true;
-}
 
 
 
@@ -227,13 +236,7 @@ function chat_stop(opponent_init) {
 	chat_ping_send = chat_time.getTime();
 }
 
-$("#message_form").submit(function(){
-	if (chat_send_message($("#text").val())) {
-		$("#text").val('');
-		$("#text").focus();
-	}
-	return false;
-});
+
 
 
 $("#chat_close").click(function(){
