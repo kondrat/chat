@@ -37,7 +37,7 @@ function chat_start() {
 	status_set('<span style="color:darkBlue;">Подключаемся к серверу</style>');
 	$.post(
 		"./messages/send",
-		{"data['action']": 'get_uid'},
+		{"data[action]": 'get_uid'},
 		function(data){
 			console.log(data);
 			if (data.result == 'ok') {
@@ -69,7 +69,7 @@ function chat_wait_opponent() {
 	status_set('<span style="color:darkOrchid;">Ожидание собеседника</span>');
 	$.post(
 		"./messages/send", 
-		{"action": 'wait_opponent', "uid": chatUid}, 
+		{"data[action]": 'wait_opponent', "uid": chatUid}, 
 		function(data){
 			if (data == 'error uid') {
 				chatUid = null;
@@ -77,8 +77,10 @@ function chat_wait_opponent() {
 			}
 		});
 	var chat_time = new Date();
+	//flag time
 	chat_ping_send = chat_time.getTime();
 }
+//------------------------------------
 
 function chat_blink_title() {
 	if (chat_focus) return;
@@ -95,7 +97,7 @@ $(document).blur(function(){
 	chat_focus = false;
 });
 
-
+//----------------------------------------------------------------
 /**
  * Long-polling connection
  */
@@ -107,7 +109,7 @@ function chat_get_events(){
 		async: true,
 		cache: false,
 		timeout:40000,
-		dataType: "text",
+		dataType: "json",
 		data: {"action": 'get'},
 		success: function(data){
 			console.log(data);
@@ -170,12 +172,12 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
-			console.log('blinnn');
+			//console.log('blinnn');
 			setTimeout('chat_get_events()', 2000)
 		}
 	})
 }
-
+//-----------------------------------------------------------------------
 function chat_new_opponent(cid) {
 	if (chat_status == 'connect') return;
 	$.post("/send", {"action": 'wait_new_opponent', "uid": chatUid, "cid": cid});

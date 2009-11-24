@@ -20,7 +20,7 @@
 		echo '<![endif]-->';
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
-		echo $javascript->link(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','chat_test','common'));//'chat',
+		echo $javascript->link(array('jquery/jquery-1.3.2.min','jquery/jquery.form','jquery/ui.core','jquery/ui.draggable','chat_test','common'));
 
 		echo $scripts_for_layout;
 	?>
@@ -30,7 +30,7 @@
 			<div class="container">
 				<div class="span-20">
 					
-					
+					<div class="headerDetail span-10">
 			        <div class="headerData">
 			       		<?php echo date("l dS \of F"); ?>
 			        </div>
@@ -38,7 +38,7 @@
 			            <?php __('Week'); 
 			            echo ' '.date("W"); ?>
 			        </div>	
-	
+					</div>
 	
 	
 			    	<div class="userbox">

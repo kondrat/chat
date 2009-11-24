@@ -21,14 +21,25 @@ class MessagesController extends AppController {
 		
 			Configure::write('debug', 0);
 			$this->autoRender = false;
+			$json = array();
 			
 			$data = $this->data['action'];
 			
+			switch($data) {
+				case 'get_uid':
+					$json = array('result' =>'ok','uid'=>md5(microtime()),'data'=>$data );
+				break;
+				case 'wait_opponent':
+					$json = array('result' =>'ok','data'=>$data );
+				break;
+				default:
+				break;
+			}
 			
 			
 			
 			
-			echo json_encode(array('result' =>'ok','data'=>$data ) );
+			echo json_encode($json);
 			
 			
 			

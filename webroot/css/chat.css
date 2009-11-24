@@ -11,6 +11,9 @@
 	min-width:75em;
 	overflow:hidden;
 }
+.headerDetail{
+	padding-top:.5em;
+}
 .headerData {
 	float:left;
 	margin-right:1em;
