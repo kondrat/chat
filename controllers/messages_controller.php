@@ -37,13 +37,8 @@ class MessagesController extends AppController {
 			}
 			
 			
-			
-			
 			echo json_encode($json);
-			
-			
-			
-			
+		
 			exit;
 			
 		}

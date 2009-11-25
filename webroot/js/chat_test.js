@@ -134,14 +134,14 @@ function chat_get_events(){
 	//alert('event');
 	$.ajax({
 		type: "POST",
-		url: "http://chat/messages/event"+chatUid,
+		url: "http://chat/messages/event/"+chatUid,
 		async: true,
 		cache: false,
 		timeout:40000,
 		dataType: "json",
 		data: {"action": 'get'},
 		success: function(data){
-			console.log(data);
+			//console.log(data);
 			setTimeout('chat_get_events()', 500)
 			$("#online_counter").text(data.online)
 			var chat_time = new Date()
