@@ -7,7 +7,7 @@
 	<div class="span-16 messageInput">
 		<?php echo $form->create();?>
 		<div class="span-14"><?php echo $form->input('body', array('class'=>'span-14','style'=> 'height:20px', 'label'=>false) );?></div>
-		<div class="span-2 last" style="margin-top: 1em;"><?php echo $form->submit(__('submit',true),array('div'=>false));?></div>
+		<div class="span-2 last" style="margin-top: 1em;"><?php echo $form->submit(__('submit',true),array('div'=>false,'id'=>'send_messge'));?></div>
 		<?php echo $form->end();?>
 	</div>
 </div>

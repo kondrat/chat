@@ -57,6 +57,7 @@ function chat_start() {
 function chat_set_uid(sid) {
 	//chatUid = sid;
 	chatUid = 'w';
+	alert(chatUid);
 	chat_get_events();
 }
 
@@ -84,17 +85,24 @@ function chat_wait_opponent() {
 /**
  * Send message
  */
-$("#message_form").submit(function(){
-	if ( chat_send_message( $("#text").val() ) ) {
-		$("#text").val('');
-		$("#text").focus();
-	}
-	return false;
+$(document).ready(function(){
+	$("#MessageAddForm").submit(function(){
+		//alert( $("#MessageBody").val()  );
+		if ( chat_send_message( $("#MessageBody").val() ) ) {
+			$("#MessageBody").val('');
+			$("#MessageBody").focus();
+		}
+		return false;
+	});
 });
 
 function chat_send_message(message) {
+	alert('hiu :'+message);
 	if (!chat_cid) {
+		alert('ups');
 		return false;
+	} else {
+		alert(message);
 	}
 	$.post("/send", {"action": 'send_message', "uid": chatUid, "cid": chat_cid, "message": message});
 	var chat_time = new Date();
@@ -123,10 +131,10 @@ $(document).blur(function(){
  * Long-polling connection
  */
 function chat_get_events(){
-	//console.log('log lon-poll');
+	//alert('event');
 	$.ajax({
 		type: "POST",
-		url: "http://chat/messages/event",
+		url: "http://chat/messages/event"+chatUid,
 		async: true,
 		cache: false,
 		timeout:40000,
@@ -258,7 +266,7 @@ function chat_typing_end() {
 	}
 }
 
-$("#text").keypress(function(){
+$("#MessageBody").keypress(function(){
 	if (chat_cid) {
 		date = new Date();
 		time = date.getTime();
@@ -273,7 +281,7 @@ $("#text").keypress(function(){
 	}
 });
 
-$("#text").keypress(function(event){
+$("#MessageBody").keypress(function(event){
 	if (event.keyCode == 13) {
 		$("#message_form").submit();
 		return false;
