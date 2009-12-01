@@ -39,7 +39,7 @@ function chat_start() {
 		"./messages/send",
 		{"data[action]": 'get_uid'},
 		function(data){
-			console.log(data);
+			//console.log(data);
 			if (data.result == 'ok') {
 				chat_set_uid(data.uid);
 				chat_wait_opponent();
@@ -55,9 +55,9 @@ function chat_start() {
  * Uid assigned to user.
  */
 function chat_set_uid(sid) {
-	//chatUid = sid;
-	chatUid = 'w';
-	alert(chatUid);
+	chatUid = sid;
+	//chatUid = 'w';
+	//alert(chatUid);
 	chat_get_events();
 }
 
@@ -97,7 +97,7 @@ $(document).ready(function(){
 });
 
 function chat_send_message(message) {
-	alert('hiu :'+message);
+	//alert('hiu :'+message);
 	if (!chat_cid) {
 		alert('ups');
 		return false;
@@ -209,7 +209,7 @@ function chat_get_events(){
 //-----------------------------------------------------------------------
 function chat_new_opponent(cid) {
 	if (chat_status == 'connect') return;
-	$.post("/send", {"action": 'wait_new_opponent', "uid": chatUid, "cid": cid});
+	$.post("./messages/send", {"action": 'wait_new_opponent', "uid": chatUid, "cid": cid});
 	var chat_time = new Date();
 	chat_ping_send = chat_time.getTime();
 }
@@ -219,12 +219,16 @@ function chat_new_opponent(cid) {
  * готов принять участие в чате cid
  */
 function chat_send_ready(uid, cid) {
-	$.post("/send", {"action": 'set_ready', "uid": uid, "cid": cid}, function(data){
-		if (data == 'reconnect') {
-			//alert('reconnect');
-			setTimeout('chat_start()', 100);
+	$.post(
+		"./messages/send", 
+		{"action": 'set_ready', "uid": uid, "cid": cid},
+		function(data){
+			if (data == 'reconnect') {
+				//alert('reconnect');
+				setTimeout('chat_start()', 100);
+			}
 		}
-	});
+	);
 	var chat_time = new Date();
 	chat_ping_send = chat_time.getTime();
 }

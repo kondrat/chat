@@ -27,10 +27,10 @@ class MessagesController extends AppController {
 			
 			switch($data) {
 				case 'get_uid':
-					$json = array('result' =>'ok','uid'=>md5(microtime()),'data'=>$data );
+					$json = array('result' =>'ok','uid'=>'guest_'.md5(microtime()),'data'=>$data );
 				break;
 				case 'wait_opponent':
-					$json = array('result' =>'ok','data'=>$data );
+					$json = array('result' =>'ok','cid'=>'testCid','data'=>$data );
 				break;
 				default:
 				break;
@@ -50,10 +50,17 @@ class MessagesController extends AppController {
 		if ($this->RequestHandler->isAjax()) {
 			Configure::write('debug', 0);
 			$this->autoRender = false;
+			$json = array('data'=>'not good');
+						
+						
+			if(isset($this->params['pass']['0']) && $this->params['pass']['0'] != null){
+				$json = array('data'=>$this->params['pass']['0'] );
 
+			}
+			
+			
 
 								$f = fsockopen("localhost","8088");
-
 
 								fwrite($f,								
 													"HTTP/1.1 200 OK\n" .
@@ -69,7 +76,9 @@ class MessagesController extends AppController {
 								if (substr($ids, -1) == ".") {
 									// Checked that ALL data is received ("." at the end).
 									print_r(explode(",", trim(substr($ids, 0, -1))));
-								} 
+								}
+								
+			echo json_encode($json);					
 			exit;
 		}
 
