@@ -33,6 +33,7 @@ class MessagesController extends AppController {
 					$json = array('result' =>'ok','cid'=>'testCid','data'=>$data );
 				break;
 				default:
+					$json = array('result' =>'ok','data'=>'default');
 				break;
 			}
 			
@@ -57,9 +58,6 @@ class MessagesController extends AppController {
 				$json = array('data'=>$this->params['pass']['0'] );
 
 			}
-			
-			
-
 								$f = fsockopen("localhost","8088");
 
 								fwrite($f,								
@@ -79,6 +77,9 @@ class MessagesController extends AppController {
 								}
 								
 			echo json_encode($json);					
+			exit;
+		} else {
+			echo 'no ajax';
 			exit;
 		}
 

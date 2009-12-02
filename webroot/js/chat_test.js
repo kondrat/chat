@@ -67,12 +67,15 @@ function chat_set_uid(sid) {
  * Сообщить об ожидании оппонента
  */
 function chat_wait_opponent() {
+	//alert('waiting opponent');
 	status_set('<span style="color:darkOrchid;">Ожидание собеседника</span>');
 	$.post(
-		"./messages/send", 
+		"http:chat:8088/messages/send", 
 		{"data[action]": 'wait_opponent', "uid": chatUid}, 
 		function(data){
+			alert('no error uid');
 			if (data == 'error uid') {
+				alert('error uid');
 				chatUid = null;
 				setTimeout('chat_start()', 100);
 			}
@@ -201,8 +204,9 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
+			alert('bli');
 			//console.log('blinnn');
-			setTimeout('chat_get_events()', 2000)
+			//setTimeout('chat_get_events()', 2000)
 		}
 	})
 }
