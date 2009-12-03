@@ -3,9 +3,10 @@ class MessagesController extends AppController {
 
 	var $name = 'Messages';
 	var $helpers = array();
+	var $uses = array('Queue.QueuedTask');
 //--------------------------------------------------------------------	
 	function beforeFilter() {
-		$this->Auth->allow('index','add','send','event');
+		$this->Auth->allow('index','add','send');
 		parent::beforeFilter(); 
 		$this->Auth->autoRedirect = false;
 
@@ -30,7 +31,18 @@ class MessagesController extends AppController {
 					$json = array('result' =>'ok','uid'=>'guest_'.md5(microtime()),'data'=>$data );
 				break;
 				case 'wait_opponent':
+					
 					$json = array('result' =>'ok','cid'=>'testCid','data'=>$data );
+					
+					$this->data['QueuedTask']['jobtype'] = 'chat';
+					$this->data['QueuedTask']['data'] = 'want';
+					if(!$this->QueuedTask->save($this->data) ) {
+						$json = array('bliiinnn');
+					}
+					
+					//$mm = $this->QueuedTask->find('all');
+					//$json = array($mm);
+					
 				break;
 				default:
 					$json = array('result' =>'ok','data'=>'default');
@@ -43,46 +55,6 @@ class MessagesController extends AppController {
 			exit;
 			
 		}
-	}
-
-//--------------------------------------------------------------------
-
-	function event() {
-		if ($this->RequestHandler->isAjax()) {
-			Configure::write('debug', 0);
-			$this->autoRender = false;
-			$json = array('data'=>'not good');
-						
-						
-			if(isset($this->params['pass']['0']) && $this->params['pass']['0'] != null){
-				$json = array('data'=>$this->params['pass']['0'] );
-
-			}
-								$f = fsockopen("chat","8088");
-
-								fwrite($f,								
-													"HTTP/1.1 200 OK\n" .
-													//"Content-Type	text/plain\n" .																									
-													"identifier=w\n" 
-								);
-
-								//stream_socket_shutdown($f, STREAM_SHUT_WR);
-								$ids = stream_get_contents($f);
-								echo $ids;
-								fclose($f);
-	
-								if (substr($ids, -1) == ".") {
-									// Checked that ALL data is received ("." at the end).
-									print_r(explode(",", trim(substr($ids, 0, -1))));
-								}
-								
-			echo json_encode($json);					
-			exit;
-		} else {
-			echo 'no ajax';
-			exit;
-		}
-
 	}
 
 //--------------------------------------------------------------------

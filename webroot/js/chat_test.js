@@ -42,8 +42,7 @@ function chat_start() {
 			//console.log(data);
 			if (data.result == 'ok') {
 				chat_set_uid(data.uid);
-				//chat_wait_opponent();
-				ttt();
+				chat_wait_opponent();
 			}
 		},
 		"json"
@@ -68,13 +67,11 @@ function chat_set_uid(sid) {
  * Сообщить об ожидании оппонента
  */
 function chat_wait_opponent() {
-	//alert('waiting opponent');
 	status_set('<span style="color:darkOrchid;">Ожидание собеседника</span>');
 	$.post(
-		"http://chat/messages/send", 
+		"./messages/send", 
 		{"data[action]": 'wait_opponent', "uid": chatUid}, 
 		function(data){
-			alert('no error uid');
 			if (data == 'error uid') {
 				alert('error uid');
 				chatUid = null;
@@ -85,21 +82,6 @@ function chat_wait_opponent() {
 	//flag time
 	chat_ping_send = chat_time.getTime();
 }
-
-function ttt() {
-	//alert('waiting opponent');
-	status_set('<span style="color:red; font-weight:bold;">test ttt</span>');
-	$.post(
-		"http://chat/ttts/ttt", 
-		{"data[action]": 'wait_opponent', "uid": "uid"}, 
-		function(data){
-			alert(data);
-		});
-
-}
-
-
-
 
 
 //------------------------------------
@@ -155,13 +137,14 @@ function chat_get_events(){
 	//alert('event');
 	$.ajax({
 		type: "POST",
-		url: "http://chat/messages/event/"+chatUid,
+		url: "./events/index/"+chatUid,
 		async: true,
 		cache: false,
 		timeout:40000,
 		dataType: "json",
 		data: {"action": 'get'},
 		success: function(data){
+			//alert(data);
 			//console.log(data);
 			setTimeout('chat_get_events()', 500)
 			$("#online_counter").text(data.online)
