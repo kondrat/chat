@@ -1,4 +1,3 @@
-/*
 soundManager.flashVersion = 9;
 soundManager.url = '/swf/';
 soundManager.useHighPerformance = true;
@@ -11,7 +10,7 @@ soundManager.onload = function(){
 	soundManager.createSound({id: 'obtaining', url: '/mp3/message-inbound.mp3'});
 	soundManager.createSound({id: 'sending', url: '/mp3/message-outbound.mp3'});
 };
-*/
+
 var chat_uid = null;
 var chat_cid = null;
 var chat_typing_time = null;
@@ -22,7 +21,6 @@ var chat_title_timer;
 var chat_ping_send = null;
 var chat_ping_receive = null;
 
-var chat_original_title = null;
 /**
  * Возможные статусы:
  * disconnect, connect
@@ -327,10 +325,8 @@ function test_ping_receive() {
 }
 
 $(document).ready(function(){
-	/*
 	var s = readCookie('sound');
 	chat_switch_sound(!s || s == 'on', false);
-	*/
 	setInterval('test_ping_send()', 1000);
 	setInterval('test_ping_receive()', 1000);
 });
@@ -345,3 +341,4 @@ window.onbeforeunload = function () {
 		return;
 	}
 };
+

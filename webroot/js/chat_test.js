@@ -69,7 +69,7 @@ function chat_set_uid(sid) {
 function chat_wait_opponent() {
 	status_set('<span style="color:darkOrchid;">Ожидание собеседника</span>');
 	$.post(
-		"./messages/send", 
+		"http://chat/messages/send", 
 		{"data[action]": 'wait_opponent', "uid": chatUid}, 
 		function(data){
 			if (data == 'error uid') {
@@ -205,7 +205,7 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
-			//alert('bli');
+			alert('bli');
 			//console.log('blinnn');
 			setTimeout('chat_get_events()', 2000)
 		}

@@ -27,6 +27,8 @@ class EventsController extends AppController {
 			if(isset($this->params['pass']['0']) && $this->params['pass']['0'] != null){
 				$json = array('data'=>$this->params['pass']['0'] );
 			}
+								//socket block
+								
 								$f = fsockopen("chat","8088");
 
 								fwrite($f,								
@@ -44,7 +46,7 @@ class EventsController extends AppController {
 									// Checked that ALL data is received ("." at the end).
 									print_r(explode(",", trim(substr($ids, 0, -1))));
 								}
-
+								
 
 
 			
