@@ -58,7 +58,7 @@ class MessagesController extends AppController {
 				$json = array('data'=>$this->params['pass']['0'] );
 
 			}
-								$f = fsockopen("localhost","8088");
+								$f = fsockopen("chat","8088");
 
 								fwrite($f,								
 													"HTTP/1.1 200 OK\n" .
@@ -89,6 +89,21 @@ class MessagesController extends AppController {
 
 
 
+	function ttt() {
+		if ($this->RequestHandler->isAjax()) {
+		
+			Configure::write('debug', 0);
+			$this->autoRender = false;
+			$json = array('ttt'=>'ttt');
+			
+			echo json_encode($json);
+		
+			exit;
+			
+		}
+	}
+
+//--------------------------------------------------------------------
 
 
 

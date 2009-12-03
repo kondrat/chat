@@ -42,7 +42,8 @@ function chat_start() {
 			//console.log(data);
 			if (data.result == 'ok') {
 				chat_set_uid(data.uid);
-				chat_wait_opponent();
+				//chat_wait_opponent();
+				ttt();
 			}
 		},
 		"json"
@@ -70,7 +71,7 @@ function chat_wait_opponent() {
 	//alert('waiting opponent');
 	status_set('<span style="color:darkOrchid;">Ожидание собеседника</span>');
 	$.post(
-		"http:chat:8088/messages/send", 
+		"http://chat/messages/send", 
 		{"data[action]": 'wait_opponent', "uid": chatUid}, 
 		function(data){
 			alert('no error uid');
@@ -84,6 +85,23 @@ function chat_wait_opponent() {
 	//flag time
 	chat_ping_send = chat_time.getTime();
 }
+
+function ttt() {
+	//alert('waiting opponent');
+	status_set('<span style="color:red; font-weight:bold;">test ttt</span>');
+	$.post(
+		"http://chat/ttts/ttt", 
+		{"data[action]": 'wait_opponent', "uid": "uid"}, 
+		function(data){
+			alert(data);
+		});
+
+}
+
+
+
+
+
 //------------------------------------
 /**
  * Send message
@@ -204,9 +222,9 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
-			alert('bli');
+			//alert('bli');
 			//console.log('blinnn');
-			//setTimeout('chat_get_events()', 2000)
+			setTimeout('chat_get_events()', 2000)
 		}
 	})
 }
