@@ -137,7 +137,7 @@ function chat_get_events(){
 	//alert('event');
 	$.ajax({
 		type: "POST",
-		url: "./events/index/"+chatUid,
+		url: "http://chat/chat/",//+chatUid,
 		async: true,
 		cache: false,
 		timeout:40000,
@@ -205,7 +205,7 @@ function chat_get_events(){
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown){
-			alert('bli');
+			//alert('bli');
 			//console.log('blinnn');
 			setTimeout('chat_get_events()', 2000)
 		}

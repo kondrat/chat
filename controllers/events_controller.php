@@ -29,23 +29,7 @@ class EventsController extends AppController {
 			}
 								//socket block
 								
-								$f = fsockopen("chat","8088");
 
-								fwrite($f,								
-													"HTTP/1.1 200 OK\n" .
-													//"Content-Type	text/plain\n" .																									
-													"identifier=w\n" 
-								);
-
-								//stream_socket_shutdown($f, STREAM_SHUT_WR);
-								$ids = stream_get_contents($f);
-								echo $ids;
-								fclose($f);
-	
-								if (substr($ids, -1) == ".") {
-									// Checked that ALL data is received ("." at the end).
-									print_r(explode(",", trim(substr($ids, 0, -1))));
-								}
 								
 
 
