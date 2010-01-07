@@ -6,7 +6,7 @@
 		<?php __('pvr:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.3/mootools.js"></script>
+	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.3/mootools.js"></script>-->
 	<?php
 
 	
@@ -21,7 +21,8 @@
 		echo '<![endif]-->';
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
-		echo $javascript->link(array('mootools/dumbchat'));
+		//echo $javascript->link(array('mootools/dumbchat'));
+		echo $javascript->link(array('jquery/jquery-1.3.2.min','real/dklab_realplexor','chat_test_2'));
 
 		echo $scripts_for_layout;
 	?>
