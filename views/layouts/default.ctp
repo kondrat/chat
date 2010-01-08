@@ -22,7 +22,7 @@
 
 		echo $javascript->codeBlock('var path = "'.Configure::read('path').'";' );
 		//echo $javascript->link(array('mootools/dumbchat'));
-		echo $javascript->link(array('jquery/jquery-1.3.2.min','real/dklab_realplexor','chat_test_2'));
+		echo $javascript->link(array('jquery/jquery-1.3.2.min','real/dklab_realplexor'));
 
 		echo $scripts_for_layout;
 	?>
