@@ -3,7 +3,7 @@ class MessagesController extends AppController {
 
 	var $name = 'Messages';
 	var $helpers = array();
-	var $uses = array('Queue.QueuedTask');
+	//var $uses = array('Queue.QueuedTask');
 //--------------------------------------------------------------------	
 	function beforeFilter() {
 		$this->Auth->allow('index','add','send');
@@ -76,17 +76,27 @@ class MessagesController extends AppController {
 	}
 
 //--------------------------------------------------------------------
-
-
-
-
-
+	function add() {
+		if ($this->RequestHandler->isAjax()) {	
+			if (!empty($this->data)) {
+				$this->Message->create();
+				if ($this->Message->save($this->data)) {
+					$this->Session->setFlash(__('The Message has been saved', true));
+					$this->redirect(array('action'=>'index'));
+				} else {
+					$this->Session->setFlash(__('The Message could not be saved. Please, try again.', true));
+				}
+			}
+		}
+	}
+//--------------------------------------------------------------------
 
 	function index() {
 		$this->Message->recursive = 0;
 		$this->set('messages', $this->paginate());
 	}
-
+	
+	
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Message.', true));
@@ -95,17 +105,9 @@ class MessagesController extends AppController {
 		$this->set('message', $this->Message->read(null, $id));
 	}
 
-	function add() {
-		if (!empty($this->data)) {
-			$this->Message->create();
-			if ($this->Message->save($this->data)) {
-				$this->Session->setFlash(__('The Message has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('The Message could not be saved. Please, try again.', true));
-			}
-		}
-	}
+
+
+
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {

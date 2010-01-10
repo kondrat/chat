@@ -5,6 +5,14 @@
 	$mpl = new Dklab_Realplexor("127.0.0.1", "10010", "demo_");
 
 
+	$ids = strlen(@$_GET["ids"])? explode(",", $_GET["ids"]) : array("alpha", "beta","ttt");
+	
+	$mt = null;
+	
+	foreach ($ids as $id) {
+		$mt .= 'addListen('.json_encode($id).');';
+	}
+
 	$script = 
 	'var realplexor = new Dklab_Realplexor(
 	"http://rpl.'. $_SERVER['HTTP_HOST'].'/?'.  0*time().'",  // URL of engine
@@ -61,24 +69,23 @@ $(document).ready(function() {
 	');
 	
 	
-	// Create initial boards set.'.
-	 $ids = strlen(@$_GET["ids"])? explode(",", $_GET["ids"]) : array("alpha", "beta","ttt");
-	foreach ($ids as $id) {
-		'addListen('.json_encode($id).');';
-	}.'
-	
+	// Create initial boards set
+		'
+		.$mt.
+		'
 	});'
 
 ?>
 <?php echo $javascript->codeBlock($script, $options = array('allowCache'=>true,'safe'=>true,'inline'=>false));?>
 
+<?php echo $javascript->link('formsend', false) ;?>
 
 
 <div class="span-16" style="margin-bottom: 1em;">
 	<h2><?php __('Messages');?></h2>
 	<div class="span-16" style="margin-bottom:1em;"><button id="startChat">Start chat</button></div>
 	<div class="span-16 messageField" style="height:100px; background-color: #eee;border:1px solid #ccc;">
-		<div id="messages">
+		<div id="board">
 		</div>
 		
 	
@@ -86,7 +93,7 @@ $(document).ready(function() {
 	<div class="span-16 messageInput">
 		<?php echo $form->create();?>
 		<div class="span-14"><?php echo $form->input('body', array('class'=>'span-14','style'=> 'height:20px', 'label'=>false) );?></div>
-		<div class="span-2 last" style="margin-top: .8em;"><?php echo $form->submit(__('submit',true),array('div'=>false,'id'=>'send_messge'));?></div>
+		<div class="span-2 last" style="margin-top: .5em;"><?php echo $form->submit(__('submit',true),array('div'=>false,'id'=>'send_messge','class'=>'send'));?></div>
 		<?php echo $form->end();?>
 	</div>
 </div>
