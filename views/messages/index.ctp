@@ -50,6 +50,7 @@
 	
 			// Handle "close button".
 			$(".close").live("click", function() {
+
 				var n = $(this).parents(".board");
 				realplexor.unsubscribe(n[0].identifier, n[0].callback);
 				realplexor.execute();
@@ -87,9 +88,11 @@
 	<h2><?php __('Messages');?></h2>
 	<div class="span-16" style="margin-bottom:1em;"><button id="startChat">Start chat</button></div>
 	<div class="span-16 messageField" style="min-height:100px; background-color: #eee;border:1px solid #ccc;">
-		<div id="board" style="border:1px solid; padding: 1em;min-height:3em;background-color:#fff;margin:1em;display:none;" class="span-4">
+		<div id="board" style="border:1px solid; padding: 1em;min-height:3em;background-color:#fff;margin:1em;display:none;" class="span-4 board">
 			<div class="boardHead" style="border-bottom:4px solid bisque;">
+				<span style="color:green;">Channel:</span>
 				<span class="title"></span>
+				<span style="display:block;height:15px;width:15px;float:right;background-color:red;cursor:pointer;" class="close"><?php echo $html->image('icons/close.png');?></span>
 			</div>
 			
 			<div class="board_body"> </div>
@@ -100,6 +103,7 @@
 	</div>
 	<div class="span-16 messageInput">
 		<?php echo $form->create();?>
+		<div class="span-14"><?php echo $form->input('identifier', array('class'=>'span-14 identifier','style'=> 'height:20px', 'label'=>false, 'value'=>'alpha') );?></div>
 		<div class="span-14"><?php echo $form->input('body', array('class'=>'span-14','style'=> 'height:20px', 'label'=>false) );?></div>
 		<div class="span-2 last" style="margin-top: .5em;"><?php echo $form->submit(__('submit',true),array('div'=>false,'id'=>'send_messge','class'=>'send'));?></div>
 		<?php echo $form->end();?>
