@@ -36,7 +36,7 @@ function chat_start() {
 	}
 	status_set('<span style="color:darkBlue;">Подключаемся к серверу</style>');
 	$.post(
-		"./messages/send",
+		"./messages/ttt",
 		{"data[action]": 'get_uid'},
 		function(data){
 			//console.log(data);

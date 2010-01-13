@@ -6,7 +6,7 @@ class MessagesController extends AppController {
 	//var $uses = array('Queue.QueuedTask');
 //--------------------------------------------------------------------	
 	function beforeFilter() {
-		$this->Auth->allow('index','add','send');
+		$this->Auth->allow('index','add','send','ttt');
 		parent::beforeFilter(); 
 		$this->Auth->autoRedirect = false;
 
@@ -66,9 +66,16 @@ class MessagesController extends AppController {
 		
 			Configure::write('debug', 0);
 			$this->autoRender = false;
-			$json = array('ttt'=>'ttt');
 			
-			echo json_encode($json);
+			App::import('Vendor', 'dklab/realplexor');
+			$mpl = new Dklab_Realplexor("127.0.0.1", "10010", "demo_");
+			$ids = explode(",", $_POST['ids']);
+			$mpl->send($ids, $_POST['message']);
+			
+			
+			//$json = array('ttt'=>'ttt');
+			
+			//echo json_encode($json);
 		
 			exit;
 			

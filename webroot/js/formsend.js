@@ -1,27 +1,28 @@
 jQuery(document).ready( function(){
 
 	$(".send").live("click", function() {
-		alert('click');
+		
 		var ids = $.map($('.identifier', this.form), function(e) { return e.value? e.value : null });
-		alert(ids);
 
-		var message = this.form.message.value;
-				alert(message);
-		var repeat = this.form.repeat.value;
-		var loader = $('img', this.form);
+		//var message = this.form.data[message][body].value;
+		
+		var message = $('#MessageBody').val();
+
+		//var repeat = this.form.repeat.value;
+		//var loader = $('img', this.form);
 	
-		loader.show();
+		//loader.show();
 		
 		$.ajax({
 			type: "POST",
-			url: "ajax_post.php", 
-			data: { ids: ids.join(","), message: message, repeat: repeat }, 
+			url: "./messages/ttt", 
+			data: { ids: ids.join(","), message: message }, 
 			complete: function(xhr, status) { 
-				loader.hide();
+				//loader.hide();
 				if (xhr.responseText) alert("Error: " + xhr.responseText); 
 			}
 		});
-		alert('click200');
+		//alert('click200');
 		return false; 
 	});
 	
